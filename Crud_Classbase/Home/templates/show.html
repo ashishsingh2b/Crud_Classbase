@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'show.css' %}">
+    <title>Show Data</title>
+</head>
+<body>
+    {{msg}}
+    <h2 id="head">Show All Data</h2>
+    <div id="SecondDiv">
+        <form action="/" method="post" >
+            {% csrf_token %}
+        </form>
+      
+    </div>
+    <div id="OneDiv">
+        <table>
+            <thead>
+                <th>Data 1</th>
+                <th>Data 2</th>
+                <th>Buttons</th>
+            </thead>
+            {% for d in data %}
+                <tr>
+                    <td>{{d.data1}}</td>
+                    <td>{{d.data2}}</td>
+                    <td>
+                        <a href="{% url 'edit' d.id %}">Edit</a>
+                        <a href="{% url 'delete' d.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <a href="{% url 'home' %}"><input type="Submit" value="<< Back"></a>
+            
+        </table>
+
+    </div>
+</body>
+</html>
